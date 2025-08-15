@@ -1,0 +1,21 @@
+apiVersion: "networking.k8s.io/v1"
+kind: Ingress
+metadata:
+  name: mini-ingress
+  labels:
+    app: nginx
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: "/"  
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: work.argocd.cn   # 访问域名，当用户访问这个域名的时候，Ingress将应用以下规则
+    http:
+      paths:
+      - path: / 
+        pathType: Prefix
+        backend: 
+          service: 
+            name: test
+            port:
+              number: 80

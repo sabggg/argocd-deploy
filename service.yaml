@@ -1,0 +1,11 @@
+apiVersion: "v1"
+kind: Service
+metadata:
+  name: test
+spec:
+  selector:  # 标签选择器
+    app: nginx   # 指定后端服务Pod,把流量路由到带有app=nginx的后端Pod上
+  type: ClusterIP  # 使用了Ingress，此处的svc的类型写为ClusterIP是一个规范的用法
+  ports:
+  - port: 80  # 对外暴露80端口
+    targetPort: 80  # 此处填写容器真实暴露出来的端口,流量将会被路由到这个端口上
